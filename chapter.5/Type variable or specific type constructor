@@ -1,0 +1,9 @@
+2.
+f :: zed -> Zed -> Blah
+fully polymorphic [0], concrete [1],[2]
+3.
+f :: Enum b => a -> b -> C
+[0] fully, constrained poly [1], concrete [2]
+4.
+f :: f -> g -> C
+[0],[1] fully, [2] concrete

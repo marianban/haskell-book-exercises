@@ -1,0 +1,14 @@
+1. [1, 2, 3, 4, 5]
+NF
+2. 1 : 2 : 3 : 4 : _
+WHNF
+3. enumFromTo 1 10
+any
+4. length [1, 2, 3, 4, 5]
+any
+5. sum (enumFromTo 1 10)
+WHNF??
+6. ['a'..'m'] ++ ['n'..'z']
+any
+7. (_, 'b')
+NF

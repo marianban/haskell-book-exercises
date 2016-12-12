@@ -1,0 +1,23 @@
+Zipping exercises
+1. Write your own version of zip :: [a] -> [b] -> [(a, b)] and
+ensure it behaves the same as the original.
+
+module CustomZip where
+  customZip :: [a] -> [b] -> [(a, b)]
+  customZip [] _ = []
+  customZip _ [] = []
+  customZip (x : xs) (y : ys) = (x, y) : customZip xs ys
+
+2. Do what you did for zip, but now for zipWith :: (a -> b -> c)
+-> [a] -> [b] -> [c]
+
+module CZipWith where
+  cZipWith :: (a -> b -> c) -> [a] -> [b] -> [c]
+  cZipWith _ [] _ = []
+  cZipWith _ _ [] = []
+  cZipWith f (x : xs) (y : ys) = (f x y) : cZipWith f xs ys
+
+
+3. Rewrite your zip in terms of the zipWith you wrote.
+
+customZip2 = cZipWith (\x -> \y -> (x, y))

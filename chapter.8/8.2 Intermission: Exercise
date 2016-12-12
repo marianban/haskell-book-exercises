@@ -1,0 +1,15 @@
+applyTimes 0 f b = b
+applyTimes times f b = f (applyTimes (times - 1) f b)
+
+applyTimes 5 f 5
+f ( applyTimes 4 f 5)
+f ( f( applyTimes 3 f 5) )
+f ( f ( f( applyTimes 2 f 5) ) )
+f ( f ( f ( f( applyTimes 1 f 5) ) ) )
+f ( f ( f ( f ( f( applyTimes 0 f 5) ) ) ) )
+f ( f ( f ( f ( f( 5) ) ) ) )
+f ( f ( f ( f ( 6 ) ) ) )
+f ( f ( f ( 7 ) ) )
+f ( f ( 8 ) )
+f ( 9 )
+10

@@ -1,0 +1,82 @@
+1. What is the type of [[True, False], [True, True], [False, True]]?
+d) [[Bool]]
+
+2. Which of the following has the same type as [[True, False],
+[True, True], [False, True]]?
+b) [[3 == 3], [6 > 5], [3 < 4]]
+
+3. For the following function
+func :: [a] -> [a] -> [a]
+func x y = x ++ y
+which of the following is true?
+d) all of the above
+
+4. For the func code above, which is a valid application of func to
+both of its arguments?
+b) func "Hello" "World"
+
+Reviewing currying
+
+cattyConny :: String -> String -> String
+cattyConny x y = x ++ " mrow " ++ y
+
+flippy :: String -> String -> String
+flippy = flip cattyConny
+
+appendCatty :: String -> String
+appedCatty = cattyConny "woops"
+frappe :: String -> String
+frappe = flippy "haha"
+
+1. What is the value of appedCatty "woohoo!" ? Try to determine the
+answer for yourself, then test in the REPL.
+"woops mrow woohoo!"
+
+2. frappe "1"
+"1 mrow haha"
+
+3. frappe (appedCatty "2")
+"woops mrow 2 mrow haha"
+
+4. appedCatty (frappe "blue")
+"whoops mrow blue mrow haha"
+
+5. cattyConny (frappe "pink") (cattyConny "green" (appedCatty "blue"))
+cattyConny "pink mrow haha" (cattyConny "green" "whoops mrow blue")
+cattyConny "pink mrow haha" "green mrow whoops mrow blue"
+"pink mrow haha mrow green mrow whoops mrow blue"
+
+6. cattyConny (flippy "Pugs" "are") "awesome"
+cattyConny "are mrow Pugs" "awesome"
+"are mrow Pugs mrow awesome"
+
+Recursion
+1. Write out the steps for reducing dividedBy 15 2 to its final answer
+according to the Haskell code.
+go 15 2 0 = go 13 2 1
+go 13 2 1 = go 11 2 2
+go 11 2 2 = go 9 2 3
+go 9 2 3 = go 7 2 4
+go 7 2 4 = go 5 2 5
+go 5 2 5 = go 3 2 6
+go 3 2 6 = go 1 2 7
+go 1 2 7 = (7, 1)
+
+2. Write a function that recursively sums all numbers from 1 to n,
+n being the argument. So that if n was 5, you’d add 1 + 2 + 3 + 4
++ 5 to get 15. The type should be (Eq a, Num a) => a -> a.
+module SumNum where
+  sumNum :: (Eq a, Num a) => a -> a
+  sumNum n
+    | n == 0 = 0
+    | otherwise = n + sumNum (n - 1)
+
+3. Write a function that multiplies two integral numbers using
+recursive summation. The type should be (Integral a) => a ->
+a -> a.
+
+module MultiplieadBy where
+  multipliedBy :: Integral a => a -> a -> a
+  multipliedBy multiplicand multiplier
+    | multiplier == 0 = 0
+    | otherwise = multiplicand + multipliedBy multiplicand (multiplier - 1)

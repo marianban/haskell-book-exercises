@@ -1,0 +1,20 @@
+1.
+bigNum x = (^) 5 x
+wahoo = bigNum 10
+
+2.
+x = print
+y = print "woohoo!"
+z = x "hello world"
+
+3.
+a = (+)
+b = 5
+c = b `a` 10
+d = c `a` 200
+
+4.
+c = 1
+b = 10000 * c
+a = 12
+ + b

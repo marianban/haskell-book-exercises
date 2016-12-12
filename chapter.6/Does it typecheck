@@ -1,0 +1,15 @@
+1.
+
+data Person = Person Bool deriving Show
+printPerson :: Person -> IO ()
+printPerson person = putStrLn (show person)
+
+2.
+
+data Mood = Blah | Woot deriving (Show, Eq)
+settleDown x = if x == Woot then Blah else x
+
+3.
+
+4. works
+5.
