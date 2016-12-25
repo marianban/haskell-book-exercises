@@ -1,0 +1,32 @@
+1. Given the following sets of consonants and vowels:
+stops = "pbtdkg"
+vowels = "aeiou"
+a) Write a function that takes inputs from stops and vowels
+and makes 3-tuples of all possible stop-vowel-stop com-
+binations. These will not all correspond to real words in
+English, although the stop-vowel-stop pattern is common
+enough that many of them will.
+stopVowelStop = [(x,y,z) | x <- stops, y <- vowels, z <- stops]
+
+b) Modify that function so that it only returns the combina-
+tions that begin with a p.
+stopVowelStop = [(x,y,z) | x <- stops, y <- vowels, z <- stops]
+
+c) Now set up lists of nouns and verbs (instead of stops and
+vowels) and modify the function to make tuples represent-
+ing possible noun-verb-noun sentences.
+nounVerbsNoun nouns verbs = [(n, v, n') | n <- nouns, v <- verbs, n' <- nouns]
+
+2. What does the following mystery function do? What is its type?
+Try to get a good sense of what it does before you test it in the
+REPL to verify it.
+
+seekritFunc x =
+(div) (sum (map length (words x)))
+(length (words x))
+- average word length
+
+3. We’d really like the answer to be more precise. Can you rewrite
+that using fractional division?
+seekritFunc x =
+  (/) (fromIntegral $ sum (map length (words x))) (fromIntegral $ length (words x))
