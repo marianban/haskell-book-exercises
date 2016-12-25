@@ -15,23 +15,28 @@ module DataProcessing where
     DbDate (UTCTime (fromGregorian 1921 5 1) (secondsToDiffTime 34123))
     ]
 
--- TODO: use fold
   filterDbDate :: [DatabaseItem] -> [UTCTime]
-  filterDbDate xs = foldl f [] xs where
+  filterDbDate = foldr f [] where
+    f :: DatabaseItem -> [UTCTime] -> [UTCTime]
     f (DbDate x) xs = x : xs
     f _ xs = xs
-  {-
+  {- filter version
   filterDbDate xs = map (\(DbDate x) -> x) (filter isUtcTime xs) where
     isUtcTime :: DatabaseItem -> Bool
     isUtcTime (DbDate _) = True
     isUtcTime _ = False
   -}
   filterDbNumber :: [DatabaseItem] -> [Integer]
+  filterDbNumber xs = foldl f [] xs where
+    f :: [Integer] -> DatabaseItem -> [Integer]
+    f xs (DbNumber x) = x : xs
+    f xs _ = xs
+  {-
   filterDbNumber xs = map (\(DbNumber x) -> x) (filter isNumber xs) where
     isNumber :: DatabaseItem -> Bool
     isNumber (DbNumber _) = True
     isNumber _ = False
-
+  -}
   mostRecent :: [DatabaseItem] -> UTCTime
   mostRecent = maximum . filterDbDate
 
