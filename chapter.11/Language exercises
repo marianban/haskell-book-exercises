@@ -1,0 +1,20 @@
+1. Write a function that capitalizes a word.
+import Data.Char
+capitalizeWord :: String -> String
+capitalizeWord (x : xs) = (toUpper x) : xs
+Example output.
+Prelude> capitalizeWord "Titter"
+"Titter"
+Prelude> capitalizeWord "titter"
+"Titter"
+
+2. Write a function that capitalizes sentences in a paragraph. Rec-
+ognize when a new sentence has begun by checking for periods.
+Reuse the capitalizeWord function.
+
+paragraphs :: String -> [String]
+paragraphs [] = []
+paragraphs xs = take ((length $ takeWhile (/='.') xs) + 2) xs : paragraphs (drop 2 $ dropWhile (/='.') xs)
+
+capitalizeParagraph :: String -> String
+capitalizeParagraph xs = foldr (\x acc -> (capitalizeWord x) ++ acc) [] (paragraphs xs)

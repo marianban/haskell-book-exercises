@@ -1,0 +1,18 @@
+1. data PugType = PugData
+cardinality: 1
+
+2. For this one, recall that Bool is also defined with the |:
+data Airline = PapuAir | CatapultsR'Us | TakeYourChancesUnited
+cardinality: 3
+
+3. Given what we know about Int8, what’s the cardinality of Int16?
+cardinality: 65536
+
+4. Use the REPL and maxBound and minBound to examine Int and
+Integer. What can you say about the cardinality of those types?
+Int: 2*9223372036854775808
+Integer: is not bounded
+
+5. Extra credit (impress your friends!): What’s the connection
+between the 8 in Int8 and that type’s cardinality of 256?
+8 bites

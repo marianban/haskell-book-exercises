@@ -1,0 +1,28 @@
+Determine how many unique inhabitants each type has.
+Suggestion: just do the arithmetic unless you want to verify. Writ-
+ing them out gets tedious quickly.
+1. data Quad =
+One
+| Two
+| Three
+| Four
+deriving (Eq, Show)
+-- how many different forms can this take?
+eQuad :: Either Quad Quad
+eQuad = 8
+
+2. prodQuad :: (Quad, Quad)
+16
+
+3. funcQuad :: Quad -> Quad
+256
+
+4. prodTBool :: (Bool, Bool, Bool)
+8
+
+5. gTwo :: Bool -> Bool -> Bool
+16
+
+6. Hint: 5 digit number
+fTwo :: Bool -> Quad -> Quad
+65536
