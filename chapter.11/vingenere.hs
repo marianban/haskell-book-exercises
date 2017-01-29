@@ -31,3 +31,13 @@ module Vigenere where
       where
         encodingTable :: [Char]
         encodingTable = generateKeyword keyword message
+
+  main :: IO ()
+  main = do
+    putStr "Keyword: "
+    keyword <- getLine
+    putStrLn ""
+    putStr "Message: "
+    message <- getLine
+    putStrLn ""
+    putStrLn $ vigenere keyword message
