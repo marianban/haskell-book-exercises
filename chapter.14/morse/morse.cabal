@@ -1,0 +1,43 @@
+name:                morse
+version:             0.1.0.0
+synopsis:            Initial project template from stack
+description:         Please see README.md
+homepage:            https://github.com/githubuser/morse#readme
+license:             BSD3
+license-file:        LICENSE
+author:              Author name here
+maintainer:          example@example.com
+copyright:           2017 Author name here
+category:            Text
+build-type:          Simple
+cabal-version:       >=1.10
+
+library
+  hs-source-dirs:      src
+  exposed-modules:     Morse
+  ghc-options:         -Wall -fwarn-tabs
+  build-depends:       base >= 4.7 && < 5
+                     , containers
+                     , QuickCheck
+  default-language:    Haskell2010
+
+executable morse
+  hs-source-dirs:      src
+  main-is:             Main.hs
+  ghc-options:         -Wall -fwarn-tabs
+  build-depends:       base >= 4.7 && < 5
+                     , morse
+                     , containers
+                     , QuickCheck
+  default-language:    Haskell2010
+
+test-suite tests
+  type:                exitcode-stdio-1.0
+  hs-source-dirs:      tests
+  main-is:             tests.hs
+  build-depends:       base
+                     , containers
+                     , morse
+                     , QuickCheck
+  ghc-options:         -Wall -fno-warn-orphans
+  default-language:    Haskell2010
