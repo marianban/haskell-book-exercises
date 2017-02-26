@@ -28,6 +28,20 @@
   (major1) == 0 && (major2) <  2 || \
   (major1) == 0 && (major2) == 2 && (minor) <= 3)
 
+/* package QuickCheck-2.8.2 */
+#define VERSION_QuickCheck "2.8.2"
+#define MIN_VERSION_QuickCheck(major1,major2,minor) (\
+  (major1) <  2 || \
+  (major1) == 2 && (major2) <  8 || \
+  (major1) == 2 && (major2) == 8 && (minor) <= 2)
+
+/* package hspec-2.2.4 */
+#define VERSION_hspec "2.2.4"
+#define MIN_VERSION_hspec(major1,major2,minor) (\
+  (major1) <  2 || \
+  (major1) == 2 && (major2) <  2 || \
+  (major1) == 2 && (major2) == 2 && (minor) <= 4)
+
 /* tool gcc-5.4.0 */
 #define TOOL_VERSION_gcc "5.4.0"
 #define MIN_TOOL_VERSION_gcc(major1,major2,minor) (\
@@ -84,7 +98,7 @@
   (major1) == 2 && (major2) <  26 || \
   (major1) == 2 && (major2) == 26 && (minor) <= 0)
 
-#define CURRENT_COMPONENT_ID "hangman-0.1.0.0"
+#define CURRENT_COMPONENT_ID "hangman-0.1.0.0-4toxJBVGt7pHY1oKp1zCd2"
 
-#define CURRENT_PACKAGE_KEY "hangman-0.1.0.0"
+#define CURRENT_PACKAGE_KEY "hangman-0.1.0.0-4toxJBVGt7pHY1oKp1zCd2"
 

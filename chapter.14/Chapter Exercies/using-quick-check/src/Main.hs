@@ -4,6 +4,7 @@ import Test.QuickCheck
 import Test.Hspec
 import Lib (half, halfIndentity)
 import Data.List (sort)
+import Data.Char
 
 propertyFn :: Int -> Bool
 propertyFn x = ((round . halfIndentity . fromIntegral) x) == x
@@ -44,6 +45,19 @@ get2Numbers = do
   a' <- arbitrary
   return (a, a')
 
+genInt :: Gen Int
+genInt = do
+  a <- arbitrary
+  return a
+
+genList :: Gen([Int])
+genList = do
+  a <- arbitrary
+  return a
+
+genBoundedList :: Int -> Gen([Int])
+genBoundedList x = vectorOf x genInt
+
 gen2Integers :: Gen((Integer, Integer))
 gen2Integers = get2Numbers
 
@@ -72,8 +86,65 @@ powerCommutative (Positive x) (Positive y) = x ^ y == y ^ x
 checkReverse :: [Int] -> Bool
 checkReverse xs = (reverse . reverse) xs == id xs
 
+prop_checkReverse :: Property
+prop_checkReverse = forAll (genBoundedList 3) checkReverse
+
 check_dolar :: Positive Integer -> Bool
-check_dolar (Positive x) = (2^) $ (2^) x == ((2^) . (2^)) x
+check_dolar (Positive x) = ((2^) $ (2^) x) == (((2^) . (2^)) x)
+
+
+--check_twoFunctions :: ([Int], [Int]) -> Bool
+--check_twoFunctions (xs, ys) = (foldr (:) ys xs) == (xs ++ ys)
+
+--prop_twoFunctions :: Property
+--prop_twoFunctions = forAll genList check_twoFunctions
+
+genConcreteList :: Int -> Gen([Int])
+genConcreteList x = (vectorOf x genInt)
+
+prop_Length :: Int -> Property
+prop_Length x = forAll (vectorOf x genInt) checkLength
+
+checkLength :: [Int] -> Bool
+checkLength xs = length(take (length xs) xs) == length(xs)
+
+checkReadShow :: Int -> Bool
+checkReadShow x = (read (show x)) == x
+
+square x = x * x
+-- this does not hold because of precision lost in sqrt function
+--squareIdentity = square . sqrt . fromIntegral
+--checkSquare :: Int -> Bool
+--checkSquare x = (squareIdentity x) == x
+
+twice f = f . f
+fourTimes = twice . twice
+
+capitalizeWord :: String -> String
+capitalizeWord [] = []
+capitalizeWord (x : []) = [toUpper x]
+capitalizeWord (x : xs) = (toUpper x) : (lowered xs) where
+  lowered :: String -> String
+  lowered [] = []
+  lowered xs = foldr (\y acc -> (toLower y) : acc) [] xs
+
+checkIdempotence1 :: String -> Bool
+checkIdempotence1 x = (twice capitalizeWord x) == (fourTimes capitalizeWord x)
+
+checkIdempotence2 :: String -> Bool
+checkIdempotence2 x = (twice sort x) == (fourTimes sort x)
+
+{- Equal probabilites for each -}
+data Fool = Fulse | Frue deriving (Eq, Show)
+
+foolGen :: Gen Fool
+foolGen = oneof [return Fulse , return Frue]
+
+foolGen2 :: Gen Fool
+foolGen2 = frequency [(1, return Fulse), (3, return Frue)]
+
+instance Arbitrary Fool where
+  arbitrary = foolGen
 
 main :: IO ()
 main = hspec $ do
@@ -109,10 +180,34 @@ main = hspec $ do
       property powerCommutative
   -}
   {- 7 -}
+  {-
   describe "reverse" $ do
     it "executed twice equals identity of the list" $ do
-      property checkReverse
+      prop_checkReverse
+  -}
   {- 8 -}
+  {-
   describe "$" $ do
     it "fulfil its definition" $ do
       property check_dolar
+  -}
+  {- 9
+  describe "two functions" $ do
+    it "are equal" $ do
+      prop_twoFunctions
+  -}
+  {-10-}
+  describe "length" $ do
+    it "should be equal length (take n xs) == n" $ do
+      prop_Length 5
+  describe "read" $ do
+    it "should invert show" $ do
+      property checkReadShow
+  {- Idempotence -}
+  describe "idenpotence" $ do
+    it "should hold for word capitalization" $ do
+      property checkIdempotence1
+    it "should hold for word sort" $ do
+      property checkIdempotence2
+  {- Equal probabilites for each -}
+  {- Hangman tests in chapter.13/hangman/src/Spec.hs -}
