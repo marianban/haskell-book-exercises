@@ -22,6 +22,7 @@ randomElement xs = do
   return (xs !! randomDigit)
 
 shortyGen :: IO [Char]
+// not sure if this will help with the picking the same character multiple times
 shortyGen = replicateM 7 (randomElement $ join $ Prelude.replicate 5 alphaNum)
 
 saveURI :: R.Connection
