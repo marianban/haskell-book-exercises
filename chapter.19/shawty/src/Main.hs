@@ -12,7 +12,7 @@ import qualified System.Random as SR
 import Web.Scotty
 
 alphaNum :: String
-alphaNum = ['A'..'Z'] ++ ['0'..'9']
+alphaNum = ['A'..'Z'] ++ ['0'..'9'].m
 
 randomElement :: String -> IO Char
 randomElement xs = do
