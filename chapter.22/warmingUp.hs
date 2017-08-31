@@ -24,4 +24,10 @@ monadic = do
   return (a, b)
 
 monadic' :: [Char] -> ([Char], [Char])
-monadic' = cap >>= \xs -> reverse >>= \xs' -> return (xs, xs') 
+monadic' = cap >>= \xs -> reverse >>= \xs' -> return (xs, xs')
+
+newtype Reader r a = Reader { runReader :: r -> a }
+
+-- Exercise Ask
+ask :: Reader a a
+ask = Reader id
